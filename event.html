@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <script>
+            var a = 1;
+            var b = 2;
+            
+            function handler(e){
+                if(e.target.tagName == 'A'){
+                    e.preventDefault();
+                }
+                console.log(e,e.target,e.target.tagName);
+            }
+
+            //console.log("hi");
+            //debugger; //멈춰 있는 순간의 웹 페이지 상태...!
+        </script>
+        <a href = "1.html" 
+            onclick = "handler(event);">don't move</a>
+        <input 
+            type = "button" 
+            value = "hi" 
+            onclick = "
+            //    debugger;
+                handler(event);
+            "
+        >
+        <input 
+            type = "text" 
+            onchange = "
+                handler(event);
+            "
+        >
+    </body>
+</html>

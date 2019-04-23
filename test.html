@@ -1,0 +1,56 @@
+<html>
+
+<body>
+    <script>
+
+        function navTag(data) {
+
+            var i = 0;
+            var liTag = "";
+
+            while (i < data.length) {
+                liTag = liTag + ` 
+                <li>
+                    <a href="${data[i].id}.html" 
+                        onclick="
+                            mode = 'read';
+                            select_id = ${data[i].id};
+                            render();
+                            event.preventDefault();
+                        "
+                    >${data[i].title}</a>
+                </li>
+            `;
+                i++;
+            }
+
+            return `
+            <nav>
+                <ol>${liTag}</ol>
+            </nav>
+        `;
+        }
+        var mode = "welcome";
+        var contents = [
+            { id: 1, title: 'HTML', desc: 'HTML is...' },
+            { id: 2, title: 'CSS', desc: 'CSS is...' },
+            { id: 3, title: 'JavaScript', desc: 'JavaScript is...' }
+        ];
+        var selected_id = 0;
+
+        function render() {
+            var articleTitle = "";
+            var articleDesc = "";
+
+            if (mode === "welcome") {
+                articleTitle = "Welcome";
+                articleDesc = "Hello, web";
+            } else if (mode === "read") {
+                articleTitle = contents[selected_id].title;
+                articleDesc = contents[selected_id].desc;
+            }
+
+    </script>
+</body>
+
+</html>

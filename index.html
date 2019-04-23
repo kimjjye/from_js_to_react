@@ -1,0 +1,98 @@
+<html>
+
+<head></head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        function headerTag(title, sub) {
+            return `
+        <header>
+            <h1>
+                <a href="index.html"
+                    onclick= "mode = 'welcome';
+                            render();
+                            event.preventDefault();"
+                >${title}</a>
+            </h1>
+            ${sub}    
+        </header>`;
+        }
+        //${표현식==값이 되는 것, 함수, 변수, 식 등}
+
+        function navTag(data){
+
+            var i = 0;
+            var liTag = "";
+
+            while(i < data.length){
+                liTag = liTag + `
+                    <li>
+                        <a href = "${data[i].id}.html"
+                                onclick = "
+                                    mode = 'read';
+                                    select_id = ${data[i].id};
+                                    render();
+                                    event.preventDefault();
+                                    "
+                        >${data[i].title}</a>
+                    </li>
+                `;
+                i++;
+            }
+
+            return `
+            <nav>
+                <ol>${liTag}</ol>
+            </nav >
+            `;
+        }
+
+        function articleTag(title, desc) {
+            return `
+            <article>
+                <h2>${title}</h2>
+                ${desc}
+            </article>
+        `;
+        }
+
+
+        var mode = "welcome";
+        var contents = [
+            {id:1, title:'HTML', desc:'HTML is...'},
+            {id:2, title:'CSS', desc:'CSS is...'},
+            {id:3, title:'JavaScript', desc:'JavaScript is...'}
+        ];
+        var selected_id = 0;
+
+        function render() {
+            var articleTitle = "";
+            var articleDesc = "";
+
+            if (mode === "welcome") {
+                articleTitle = "Welcome";
+                articleDesc = "Hello, web";
+            } else if (mode === "read") {
+                articleTitle = contents[selected_id].title;
+                articleDesc = contents[selected_id].desc;
+            } else if (mode === "create") {
+
+            }
+            
+            document.querySelector("#app").innerHTML = (
+                headerTag("WEB", "World wide web!") + navTag(contents)+ articleTag(articleTitle, articleDesc));
+
+        }
+
+        render();
+        
+        // document.write(
+        //     headerTag("WEB", "World wide web!") +
+        //     navTag+
+        //     articleTag("Welcome", "hello, web")
+        // );
+    </script>
+</body>
+
+</html>
