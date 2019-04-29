@@ -8,7 +8,7 @@ class Subject extends Component{
 
     return (
       <header>
-        <h1>{this.props.title}</h1>
+        <h1><a href="/">{this.props.title}</a></h1>
         {this.props.sub}
       </header>
     );
@@ -57,19 +57,37 @@ class App extends Component{
     contents:[
       {id:1, title:"HTML", desc:"html is..."},
       {id:1, title:"CSS", desc:"css is..."}
-    ]
+    ],
+    mode:"read"
   }
 
   render(){
+    var _aTitle, _aDesc = "";
+    if(this.state.mode === "welcome"){
+      _aTitle = "welcome";
+      _aDesc = "Hello,world";
+    }else if(this.state.mode === "read"){
+      _aTitle = "HTML";
+      _aDesc = "HTML is...";
+    }
 
     return (
       <div className="App">
-        <Subject title="WEB" sub="World"></Subject>
+        {/* <Subject title="WEB" sub="World"></Subject> */}
+        <header>
+          <h1><a onClick={
+            function(_event){
+              console.log(this);
+              this.setState({mode:"welcome"});
+              _event.preventDefault();
+            }.bind(this)
+          }
+          href="/">WEB</a></h1>
+          World!!
+        </header>
+
         <TOC data={this.state.contents}></TOC>
-        <TOC data={this.state.contents}></TOC>
-        <TOC data={this.state.contents}></TOC>
-        <TOC data={this.state.contents}></TOC>
-        <Content title="HTML" desc="HTML is..."></Content>
+        <Content title={_aTitle}desc={_aDesc}></Content>
       </div>
     );
   }
